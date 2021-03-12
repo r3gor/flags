@@ -43,7 +43,7 @@ function APIgetCode(nombre_pais){
 function find(json_obj, element){
     keys = Object.keys(json_obj);
     for (let k of keys){
-        if (json_obj[k].toLowerCase() == element.toLowerCase())
+        if (json_obj[k].toLowerCase().trim() == element.toLowerCase().trim())
             return k; 
     }
     
