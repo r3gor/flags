@@ -28,10 +28,7 @@ function submit_pais(){
 
 function setAutocompletadoPaises(){
     el = document.getElementById("paises");
-    data = ""
-    for (let pais of APIgetPaises()){
-        data += "<option>" + pais + "</option>";
-    }
+    data = APIgetPaises().reduce((data, curr_pais) => data + "<option>" + curr_pais + "</option>", "");
     el.innerHTML = data;
 }
 
@@ -43,7 +40,7 @@ function capitalize(str){
 
 function APIgetCode(nombre_pais){
     jobj = APIgetJson();
-    code = find(jobj, nombre_pais);
+    code = find_code(jobj, nombre_pais);
     return code
 }
 
@@ -56,17 +53,10 @@ function APIgetJson(){
 }
 
 function APIgetPaises(){
-    jobj = APIgetJson();
-    keys = Object.keys(jobj);
-    return keys.reduce((ans, curr) => { return ans.concat(jobj[curr]); }, []);
+    json_obj = APIgetJson();
+    return Object.keys(json_obj).reduce((ans, curr) => { return ans.concat(json_obj[curr]); }, []);
 }
 
-function find(json_obj, element){
-    keys = Object.keys(json_obj);
-    for (let k of keys){
-        if (json_obj[k].toLowerCase().trim() == element.toLowerCase().trim())
-            return k; 
-    }
-    
-    return null
+function find_code(json_obj, element){
+    return Object.keys(json_obj).find((key) => json_obj[key].toLowerCase().trim() == element.toLowerCase().trim() )
 }
