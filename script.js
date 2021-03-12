@@ -26,18 +26,39 @@ function submit_pais(){
     el_bandera.innerHTML = data;
 }
 
+function setAutocompletadoPaises(){
+    el = document.getElementById("paises");
+    data = ""
+    for (let pais of APIgetPaises()){
+        data += "<option>" + pais + "</option>";
+    }
+    el.innerHTML = data;
+}
+
+setAutocompletadoPaises();
+
 function capitalize(str){
     return str[0].toUpperCase()+str.slice(1);
 }
 
 function APIgetCode(nombre_pais){
+    jobj = APIgetJson();
+    code = find(jobj, nombre_pais);
+    return code
+}
+
+function APIgetJson(){
     var req = new XMLHttpRequest();
     req.open("GET", "https://flagcdn.com/es/codes.json", false);
     req.send(null);
     json_text = req.responseText;
-    jobj = JSON.parse(json_text);
-    code = find(jobj, nombre_pais);
-    return code
+    return JSON.parse(json_text);
+}
+
+function APIgetPaises(){
+    jobj = APIgetJson();
+    keys = Object.keys(jobj);
+    return keys.reduce((ans, curr) => { return ans.concat(jobj[curr]); }, []);
 }
 
 function find(json_obj, element){
