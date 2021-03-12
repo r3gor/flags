@@ -10,7 +10,7 @@ function submit_pais(){
 
     el_nombre_pais = document.getElementById("pais-titulo");
     var data = "";
-    data += "<h2>"+nombre_pais;
+    data += "<h2>"+capitalize(nombre_pais);
     data += "<em> (";
     data += code? code:"No encontrado";
     data += ")</em>";
@@ -26,6 +26,10 @@ function submit_pais(){
     el_bandera.innerHTML = data;
 }
 
+function capitalize(str){
+    return str[0].toUpperCase()+str.slice(1);
+}
+
 function APIgetCode(nombre_pais){
     var req = new XMLHttpRequest();
     req.open("GET", "https://flagcdn.com/es/codes.json", false);
@@ -39,7 +43,7 @@ function APIgetCode(nombre_pais){
 function find(json_obj, element){
     keys = Object.keys(json_obj);
     for (let k of keys){
-        if (json_obj[k] == element)
+        if (json_obj[k].toLowerCase() == element.toLowerCase())
             return k; 
     }
     
