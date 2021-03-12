@@ -1,0 +1,23 @@
+body {background-color: black;}
+
+#bandera{
+    border-radius: 30px;
+    padding: 10px;
+}
+
+em{
+    font-style: normal;
+    color: yellow;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.ff{
+    color: white;
+    font-size: large;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+
+.title{
+    color: yellow
+}
